@@ -10,7 +10,7 @@ Product.findAll({
    include: [
      {model: Category, attributes: ['category_name'] },
      {model: Tag, attributes: ['tag_name']},
-     {model: ProductTag, through: {product_id, tag_id}},
+     {model: ProductTag, through: tag_id, product_id, as: 'product.id'},
    ]
 
   // be sure to include its associated Category and Tag data
@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
        include: [
          {model: Category, attributes: ['category_name']},
          {model: Tag, attributes: ['tag_name']},
-         {model: ProductTag, through:{product_id, tag_id}},
+         {model: ProductTag, through: tag_id, product_id, as: 'product.id'},
         ]
   }).then((dbProductData) => {
     if(!dbProductData) {
