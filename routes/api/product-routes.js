@@ -11,10 +11,8 @@ Product.findAll({
    include: [
      {model: Category, attributes: ['category_name'] },
      {model: Tag, through: ProductTag, as: 'brand'},
-     
-   ]
-
-  // be sure to include its associated Category and Tag data
+     ]
+// be sure to include its associated Category and Tag data
 }).then(dbProductData => res.json(dbProductData))
   .catch((err) => {
     console.log(err);
@@ -22,7 +20,6 @@ Product.findAll({
     
   });
 });
-
 // get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
@@ -124,6 +121,24 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  // update product data
+  Product.destroy({
+    where: {
+      id: req.params.id
+    }
+    //return error if no data found
+  }).then(dbProductData => {
+    if(dbProductData){
+      res.status(404).json({message: 'No category found with this id'});
+      return;
+    }
+    // return the category data
+    res.json(dbProductData);
+    //handle the error
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 module.exports = router;

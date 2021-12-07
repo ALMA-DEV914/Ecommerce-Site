@@ -52,10 +52,12 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   // create a new category
-  Category.create({
-   category_name: req.params.id
-//retrun the category data and new category was added
-  }).then(dbCategoryData => res.json(dbCategoryData))
+  Category.create(req.body)
+   
+//return the category data and new category was added
+  .then(dbNewCategoryData => {res.json(dbNewCategoryData);
+    res.json(dbCategoryData);
+})
   // handle the invalid request
   .catch(err => {
     console.log(err);
@@ -86,18 +88,18 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
-  Category.destroy({
+  Product.destroy({
     where: {
       id: req.params.id
     }
     //return error if no data found
-  }).then(dbCategoryData => {
-    if(dbCategoryData){
+  }).then(dbProductData => {
+    if(dbProductData){
       res.status(404).json({message: 'No category found with this id'});
       return;
     }
     // return the category data
-    res.json(dbCategoryData);
+    res.json(dbProductData);
     //handle the error
   }).catch(err => {
     console.log(err);
