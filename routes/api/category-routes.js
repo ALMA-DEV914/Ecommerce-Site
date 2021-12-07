@@ -8,9 +8,11 @@ const { Category, Product, ProductTag, Tag } = require('../../models');
 router.get('/', (req, res) => {
   // find all categories
   Category.findAll({
+    attributes: ['id', 'category_name'],
     // be sure to include its associated Products
     include: [{
       model: Product, attributes:['id', 'product_name', 'price', 'stock', 'category_id']},
+    
     ] 
     //return the category data
 }).then(dbCategoryData => res.json(dbCategoryData))
@@ -70,7 +72,7 @@ router.put('/:id', (req, res) => {
      // return error if data doesn't exists
   }).then(dbCategoryData => {
     if(!dbCategoryData[0]){
-      res.status(404).json({message: 'No user found with this id'});
+      res.status(404).json({message: 'No category found with this id'});
       return;
     }
     //retrun the category data
