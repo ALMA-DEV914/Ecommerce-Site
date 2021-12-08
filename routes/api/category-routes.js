@@ -54,7 +54,6 @@ router.post('/:id', (req, res) => {
   // create a new category
   Category.create({
     category_name: req.body.category_name,
-    id: req.params.id
   })
    
 //return the category data and new category was added
@@ -68,7 +67,12 @@ router.post('/:id', (req, res) => {
 
 router.put('/', (req, res) => {
   // create a new category
-  Category.update(req.body)
+  Category.update({
+    category_name: req.body.category_name,
+    where: {
+       id: req.params.id,
+    }
+  })
   //return the category data and new category was added
   .then((dbCategoryData) => {
     if(!dbCategoryData){
