@@ -50,12 +50,31 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
   // create a new category
-  Category.create(req.body)
+  Category.create({
+    category_name: req.body.category_name,
+    id: req.params.id
+  })
    
 //return the category data and new category was added
-  .then(dbNewCategoryData => {res.json(dbNewCategoryData);
+  .then(dbProductData => res.json(dbProductData))
+  // handle the invalid request
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
+});
+
+router.put('/', (req, res) => {
+  // create a new category
+  Category.update(req.body)
+  //return the category data and new category was added
+  .then((dbCategoryData) => {
+    if(!dbCategoryData){
+     res.status(500).json({message: 'No category id found'});
+     return;
+    }
     res.json(dbCategoryData);
 })
   // handle the invalid request
@@ -64,18 +83,24 @@ router.post('/', (req, res) => {
     res.status(500).json(err);
   });
 });
-router.put('/:id', (req, res) => {
-  // create a new category
-  Category.create(req.body)
-   
-//return the category data and new category was added
-  .then(dbNewCategoryData => {res.json(dbNewCategoryData);
-    res.json(dbCategoryData);
-})
-  // handle the invalid request
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+
+router.delete('/:id', (req, res) => {
+  // delete a category by its `id` value
+  Category.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(dbCategoryData => {
+      if (!dbCategoryData) {
+        res.status(404).json({ message: 'no category found for this id' });
+        return;
+      }
+      res.json(dbCategoryData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
  module.exports = router;

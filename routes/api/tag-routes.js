@@ -8,7 +8,8 @@ router.get('/', (req, res) => {
    attributes: ['id', 'tag_name'],
   // be sure to include its associated Product data
   include: [
-    {model: Product, attributes:['id', 'product_name', 'price', 'stock', 'category_id'], through: ProductTag, as: 'products'}, 
+    {model: Product, attributes:['id', 'product_name', 'price', 'stock', 'category_id'],
+    through: ProductTag, as: 'products'}, 
     ]
   }).then(dbTagData => res.json(dbTagData))
     .catch((err) => {
@@ -22,21 +23,20 @@ router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   Tag.findOne({
      where: {
-       tag_id: req.params.id,
-       
-     },
-     attributes: ['id', 'tag_name'],
+       id: req.params.id,
+       },
+       attributes: ['id', 'tag_name'],
   // be sure to include its associated Product data
     include: [
       {model: Product, attributes:['id', 'product_name', 'price', 'stock', 'category_id'], through: ProductTag, as: 'products'},
-      
-    ]
+      ]
 }).then((dbTagData) => {
   if(dbTagData){
     res.status(500).json({message: 'No tag is found'});
     return;
   }
   res.json(dbTagData);
+
 }).catch((err) => {
   console.log(err);
   res.status(404).json(err);
@@ -45,16 +45,17 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   // create a new tag
-Tag.create(req.body)
-   
+Tag.create({
+   tag_name: req.body.tag_name,
+  })
  //return the category data and new category was added
-   .then(dbNewTagData => {res.json(dbNewTagData);
-     res.json(dbTagData);
- })
-   // handle the invalid request
+   .then((dbTagData) => res.json(dbTagData))
+  
+     // handle the invalid request
    .catch(err => {
      console.log(err);
      res.status(500).json(err);
+   
    });
  });
 
