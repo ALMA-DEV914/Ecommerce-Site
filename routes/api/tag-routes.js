@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     attributes: ['id', 'tag_name'],
   // be sure to include its associated Product data
   include: [
-    {model: Product, as: 'products', attributes:['id', 'product_name', 'price', 'stock', 'category_id']}, 
+    {model: Product, attributes:['id', 'product_name', 'price', 'stock', 'category_id'], as: 'products'}, 
     
   ]
   })
@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
      attributes: ['id', 'tag_name'],
   // be sure to include its associated Product data
     include: [
-      {model: Product, as: 'products', attributes:['id', 'product_name', 'price', 'stock', 'category_id']},
+      {model: Product, attributes:['id', 'product_name', 'price', 'stock', 'category_id'], as: 'products'},
       
     ]
 }).then((dbTagData) => {
