@@ -9,8 +9,10 @@ router.get('/', (req, res) => {
 Product.findAll({
   attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
    include: [
-     {model: Category, attributes: ['category_name'] },
-     {model: Tag, through: ProductTag, as: 'brand'},
+     {model: Category, attributes: ['id', 'category_name'] },
+     {model: Tag, as: 'products', attributes: ['id', 'tag_name', 'tag_id']},
+         
+        
      ]
 // be sure to include its associated Category and Tag data
 }).then(dbProductData => res.json(dbProductData))
@@ -29,8 +31,8 @@ router.get('/:id', (req, res) => {
        }, 
        // be sure to include its associated Category and Tag data
        include: [
-         {model: Category, attributes: ['category_name']},
-         {model: Tag, through: ProductTag, as: 'brand'},
+         {model: Category, attributes: ['id', 'category_name']},
+         {model: Tag, as: 'products', attributes: ['id', 'tag_name', 'tag_id']},
         
         ]
   }).then((dbProductData) => {
