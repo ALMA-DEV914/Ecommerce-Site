@@ -10,13 +10,11 @@ Product.findAll({
   attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
    include: [
      {model: Category, attributes: ['id', 'category_name'] },
-     {model: Tag, attributes: ['id', 'tag_name', 'tag_id'], as: 'tags'},
-         
-        
-     ]
+     {model: Tag, attributes: ['id', 'tag_name', 'tag_id'], through: ProductTag, as: 'tags'},
+         ]
 // be sure to include its associated Category and Tag data
 }).then(dbProductData => res.json(dbProductData))
-  .catch((err) => {
+   .catch((err) => {
     console.log(err);
       res.status(404).json(err);
     
@@ -32,7 +30,7 @@ router.get('/:id', (req, res) => {
        // be sure to include its associated Category and Tag data
        include: [
          {model: Category, attributes: ['id', 'category_name']},
-         {model: Tag, attributes: ['id', 'tag_name', 'tag_id'], as: 'tags'},
+         {model: Tag, attributes: ['id', 'tag_name', 'tag_id'], through: ProductTag, as: 'tags'},
         
         ]
   }).then((dbProductData) => {
