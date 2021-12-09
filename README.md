@@ -24,14 +24,16 @@ The first animation is getting all produts with associated tags, get by id, add 
 
 
 
-https://user-images.githubusercontent.com/65073138/145473256-ce47614c-0ed9-4447-8b65-8ec1a73ba3fd.mov
+
+https://user-images.githubusercontent.com/65073138/145473924-cfb09373-ffad-49f7-87f7-6d073ddbf2f2.mov
+
+
 
 
 
 The second animation is getting all categories with associated products, get category by id, add new category, update the category name and delete category by id.
 
-
-
+https://user-images.githubusercontent.com/65073138/145473256-ce47614c-0ed9-4447-8b65-8ec1a73ba3fd.mov
 
 The third animation is getting all tags with associated product tags, get tags by id, create new tags, update tag by id and delete tag by id.
 
