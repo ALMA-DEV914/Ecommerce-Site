@@ -14,7 +14,7 @@ ProductTag.init(
       autoIncrement: true
     },
     //define the product name column that equal to product id
-    product_name: {
+    product_id: {
     type: DataTypes.INTEGER,
     references: {
        model: 'product',

@@ -10,9 +10,8 @@ router.get('/', (req, res) => {
    attributes: ['id', 'tag_name'],
   // be sure to include its associated Product data
   include: [
-    {model: Product,
-    through: ProductTag, as: 'products'}, 
-    ]
+  {model: Product, through: ProductTag, as: 'products'}
+]
     //return tag data
   }).then(dbTagData => res.json(dbTagData))
   //handle error
@@ -25,16 +24,15 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
-  Tag.findOne({ 
-    ...req.body,
+  Tag.findOne({
+    ...req.body, 
      where: {
        id: req.params.id
      },
   // be sure to include its associated Product data
     include: [
-      {model: Product,
-      through: ProductTag, as: 'products'},
-      ]
+      {model: Product, through: ProductTag, as: 'products'}
+  ]
       //check if there's no tag id and return false
 }).then(dbTagData => {
   if(!dbTagData){
