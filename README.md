@@ -21,7 +21,6 @@ I am required to create a walkthrough video that demonstrates its functionality.
 
 
 The first animation is getting all produts with associated tags, get by id, add new product, update product by id, and delete product by id.
-https://user-images.githubusercontent.com/65073138/145472629-c3731e2d-f81f-44be-9b77-3b28d2bda995.mov
 
 
 
