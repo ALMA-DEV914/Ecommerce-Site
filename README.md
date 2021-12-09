@@ -21,17 +21,17 @@ I am required to create a walkthrough video that demonstrates its functionality.
 
 
 The first animation is getting all produts with associated tags, get by id, add new product, update product by id, and delete product by id.
-https://user-images.githubusercontent.com/65073138/145471147-f1ec0ecf-3ba2-4f9b-8c7b-2a903c49978b.mov
+https://user-images.githubusercontent.com/65073138/145472629-c3731e2d-f81f-44be-9b77-3b28d2bda995.mov
+
 
 
 The second animation is getting all categories with associated products, get category by id, add new category, update the category name and delete category by id.
-https://user-images.githubusercontent.com/65073138/145471160-e63df158-567c-4a44-9afc-e32411b88296.mov
 
 
 
 
 The third animation is getting all tags with associated product tags, get tags by id, create new tags, update tag by id and delete tag by id.
-https://user-images.githubusercontent.com/65073138/145471167-525e9451-0085-4456-8e26-3feae8f00d54.mov
+
 
 
 
