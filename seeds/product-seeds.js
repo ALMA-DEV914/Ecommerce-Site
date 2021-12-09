@@ -1,5 +1,5 @@
 const { Product } = require('../models');
-
+//decalre the product model and the data columns
 const productData = [
   {
     product_name: 'Plain T-Shirt',

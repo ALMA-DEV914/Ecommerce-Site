@@ -97,11 +97,13 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   })
+  //if no id found return empty
     .then(dbCategoryData => {
       if (!dbCategoryData) {
         res.status(404).json({ message: 'no category found for this id' });
         return;
       }
+      //return category data if found
       res.json(dbCategoryData);
     })
     .catch(err => {
@@ -109,4 +111,5 @@ router.delete('/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
+//call back function
  module.exports = router;

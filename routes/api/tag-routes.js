@@ -1,4 +1,6 @@
+//require the router package
 const router = require('express').Router();
+//require the associated model tables endpoints
 const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
@@ -11,7 +13,9 @@ router.get('/', (req, res) => {
     {model: Product,
     through: ProductTag, as: 'products'}, 
     ]
+    //return tag data
   }).then(dbTagData => res.json(dbTagData))
+  //handle error
     .catch((err) => {
      console.log(err);
      res.status(500).json(err)
@@ -31,13 +35,15 @@ router.get('/:id', (req, res) => {
       {model: Product,
       through: ProductTag, as: 'products'},
       ]
+      //check if there's no tag id and return false
 }).then(dbTagData => {
   if(!dbTagData){
     res.status(500).json({message: 'No tag is found'});
     return;
   }
+  //return tag data if found by id
   res.json(dbTagData);
-
+//handle error
 }).catch((err) => {
   console.log(err);
   res.status(404).json(err);

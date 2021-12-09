@@ -33,13 +33,16 @@ router.get('/:id', (req, res) => {
          {model: Tag, through: ProductTag, as: 'tags'},
         
         ]
+        //if no id found return  empty data 
   }).then((dbProductData) => {
     if(!dbProductData) {
       res.status(500).json({message: 'No product is found'});
       return;
     }
+    //if found then return the product data
     res.json(dbProductData);
   })
+  //hanlde the error
   .catch((err) => {
     console.log(err)
       res.status(404).json(err);

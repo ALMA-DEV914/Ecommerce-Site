@@ -13,6 +13,7 @@ ProductTag.init(
       primaryKey: true,
       autoIncrement: true
     },
+    //define the product name column that equal to product id
     product_name: {
     type: DataTypes.INTEGER,
     references: {
@@ -20,6 +21,7 @@ ProductTag.init(
        key: 'id'
     }
   },
+  //define the tag id that equal to tag_id
    tag_id: {
     type: DataTypes.INTEGER,
     references: {
@@ -36,5 +38,5 @@ ProductTag.init(
     modelName: 'product_tag',
   }
 );
-
+//call back function
 module.exports = ProductTag;

@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
-
+//require the file path to Models
 const sequelize = require('../config/connection.js');
-
+//require the Sequelize package for connection
 class Category extends Model {}
-
+//declare Category model
 Category.init(
   {
     // define id columns
@@ -17,11 +17,13 @@ Category.init(
       //turn on auto increment
       autoIncrement: true
     },
+    //define category name columns
      category_name: {
        type: DataTypes.STRING,
        allowNull: false
   }
 },
+//call the sequelize to manipulate this category table model
   {
     sequelize,
     timestamps: false,
@@ -30,5 +32,5 @@ Category.init(
     modelName: 'category',
   }
 );
-
+//call back function
 module.exports = Category;

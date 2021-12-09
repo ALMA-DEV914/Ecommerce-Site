@@ -1,11 +1,13 @@
+//require express
 const express = require('express');
+//require or call the associated file routes 
 const routes = require('./routes');
 const sequelize = require('./config/connection');
 // import sequelize connection
-
+//initiate the application
 const app = express();
 const PORT = process.env.PORT || 3001;
-
+//use middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
