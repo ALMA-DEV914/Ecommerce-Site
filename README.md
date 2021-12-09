@@ -9,10 +9,12 @@ My challenge is to build the back end for an e-commerce site. I will take a work
 I am required to create a walkthrough video that demonstrates its functionality.
 
 ## TOOLS and Software
-NODE Packages:
-MySQL2, Express, Sequelize and dotenv
-JAVASCRIPT
-HEROKU ADD-ONS
+* NODE Packages:
+* MySQL2, Express, Sequelize and dotenv
+* JAVASCRIPT
+* HEROKU ADD-ONS
 
 ### USAGE
+
+
 ### QUESTIONS

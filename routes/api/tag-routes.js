@@ -22,13 +22,14 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   Tag.findOne({ 
+    ...req.body,
      where: {
        id: req.params.id
      },
   // be sure to include its associated Product data
     include: [
       {model: Product,
-       through: ProductTag, as: 'products'},
+      through: ProductTag, as: 'products'},
       ]
 }).then(dbTagData => {
   if(!dbTagData){
@@ -48,8 +49,9 @@ router.post('/', (req, res) => {
 Tag.create({
     tag_name: req.body.tag_name,
   })
+  
  //return the category data and new category was added
-   .then((dbNewTagData) => res.json(dbNewTagData))
+   .then((dbTagData) => res.json(dbTagData))
    
      // handle the invalid request
    .catch(err => {
@@ -61,19 +63,18 @@ Tag.create({
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
-  Tag.update({
-    ...req.body,
+  Tag.update(req.body,{
       where: {
         id: req.params.id,
        },
      // return error if data doesn't exists
-  }).then(dbUpdatedTagData => {
-    if(!dbUpdatedTagData[0]){
+  }).then(dbTagData => {
+    if(!dbTagData[0]){
       res.status(404).json({message: 'No tag found with this id'});
       return;
     }
     //retrun the category data
-    res.json(dbUpdatedTagData);
+    res.json(dbTagData);
     //handle the error
   }).catch(err => {
     console.log(err);
