@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
    attributes: ['id', 'tag_name'],
   // be sure to include its associated Product data
   include: [
-    {model: Product, attributes:['id', 'product_name', 'price', 'stock', 'category_id'],
+    {model: Product,
     through: ProductTag, as: 'products'}, 
     ]
   }).then(dbTagData => res.json(dbTagData))
@@ -21,17 +21,17 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
-  Tag.findOne({
+  Tag.findOne({ 
      where: {
-       id: req.params.id,
-       },
-       attributes: ['id', 'tag_name'],
+       id: req.params.id
+     },
   // be sure to include its associated Product data
     include: [
-      {model: Product, attributes:['id', 'product_name', 'price', 'stock', 'category_id'], through: ProductTag, as: 'products'},
+      {model: Product,
+       through: ProductTag, as: 'products'},
       ]
-}).then((dbTagData) => {
-  if(dbTagData){
+}).then(dbTagData => {
+  if(!dbTagData){
     res.status(500).json({message: 'No tag is found'});
     return;
   }
@@ -40,17 +40,17 @@ router.get('/:id', (req, res) => {
 }).catch((err) => {
   console.log(err);
   res.status(404).json(err);
-});
+ });
 });
 
 router.post('/', (req, res) => {
   // create a new tag
 Tag.create({
-   tag_name: req.body.tag_name,
+    tag_name: req.body.tag_name,
   })
  //return the category data and new category was added
-   .then((dbTagData) => res.json(dbTagData))
-  
+   .then((dbNewTagData) => res.json(dbNewTagData))
+   
      // handle the invalid request
    .catch(err => {
      console.log(err);
@@ -61,18 +61,19 @@ Tag.create({
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
-  Tag.update(req.body, {
-    where: {
-      id: req.params.id
-     }
+  Tag.update({
+    ...req.body,
+      where: {
+        id: req.params.id,
+       },
      // return error if data doesn't exists
-  }).then(dbTagData => {
-    if(!dbTagData[0]){
+  }).then(dbUpdatedTagData => {
+    if(!dbUpdatedTagData[0]){
       res.status(404).json({message: 'No tag found with this id'});
       return;
     }
     //retrun the category data
-    res.json(dbTagData);
+    res.json(dbUpdatedTagData);
     //handle the error
   }).catch(err => {
     console.log(err);
@@ -84,8 +85,8 @@ router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
   Tag.destroy({
     where: {
-      id: req.params.id
-    }
+      id: req.params.id,
+    },
     //return error if no data found
   }).then(dbTagData => {
     if(dbTagData){

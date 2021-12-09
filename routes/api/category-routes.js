@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     attributes: ['id', 'category_name'],
     // be sure to include its associated Products
     include: [{
-      model: Product, attributes:['id', 'product_name', 'price', 'stock', 'category_id']},
+      model: Product},
     
     ] 
     //return the category data
@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
     },
     // be sure to include its associated Products
     include: [{
-    model: Product, attributes: ['id', 'product_name', 'price', 'stock', 'category_id']},
+    model: Product},
     ]
 //if no data found return error
   }).then(dbCategoryData => {
@@ -50,7 +50,7 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/:id', (req, res) => {
+router.post('/', (req, res) => {
   // create a new category
   Category.create({
     category_name: req.body.category_name,
@@ -65,14 +65,15 @@ router.post('/:id', (req, res) => {
   });
 });
 
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
   // create a new category
   Category.update({
-    category_name: req.body.category_name,
+    category_name: req.body.category_name},
+    {
     where: {
        id: req.params.id,
     }
-  })
+    })
   //return the category data and new category was added
   .then((dbCategoryData) => {
     if(!dbCategoryData){
