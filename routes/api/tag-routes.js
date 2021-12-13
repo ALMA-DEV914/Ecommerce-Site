@@ -25,7 +25,6 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   Tag.findOne({
-    ...req.body, 
      where: {
        id: req.params.id
      },
