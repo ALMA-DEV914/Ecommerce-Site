@@ -7,6 +7,13 @@ Internet retail, also known as e-commerce, is the largest sector of the electron
 My challenge is to build the back end for an e-commerce site. I will take a working Express.js API and configure it to use Sequelize to interact with a MySQL database.
 
 I am required to create a walkthrough video that demonstrates its functionality.
+
+I am required to use associations that are:
+* Model product belongsTo() category
+* Model category hasMany() product
+* Model product belongsToMany() tag
+* Model tag belongsToMany() product
+
 ## WALKTHROUGH VIDEO OF APPLICATION FUNCTIONALITY
 [Click this link for further demontration](https://www.youtube.com/watch?v=XLXTBTb8uo0)
 
